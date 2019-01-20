@@ -8,7 +8,7 @@ var defaultBaseAPIURL = "https://games-api-staging.nordicfuzzcon.org/schedule/v1
 
 var defaultScheduleData = {
 		settings: {
-			zoom: 1,
+			zoom: 1.3,
 			sliderInterval: 10000,
 			sliderTransition: 500,
 			baseApiUrl: defaultBaseAPIURL,
