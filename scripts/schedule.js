@@ -34,10 +34,30 @@ var defaultEvents = [
 var defaultSettings = {
     eventsLifetime: 300 * 1000, // best-before time for schedule data, in ms
     settingsLifetime: 300 * 1000, // best-before time for schedule settings, in ms
-    settingsURLs: ["test"], // priority list of URLs to fetch settings from
-    eventURLs: ["https://games-api-staging.nordicfuzzcon.org/schedule/v1/events"], // priority list of URLs to fetch event data from
+    settingsURLs: ["/data/settings.json"], // priority list of URLs to fetch settings from
+    eventURLs: ["https://games-api-staging.nordicfuzzcon.org/schedule/v1/events", "/data/events.json"], // priority list of URLs to fetch event data from
     eventApiKey: "staging-read",
-}
+    zoom: 1, // default zoom level, useful for scaling to fit to lobby displays
+    sliderInterval: 10 * 1000, // slide change interval, in ms
+    sliderTransition: 0.5* 1000, // slide transition length, in ms
+    sliderImgs: [
+		{
+			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/placeholder_1.jpg",
+			caption: ""
+		},
+		{
+			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/background/nfc-banner_md.jpg",
+			caption: ""
+		},
+		{
+			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/background/Background_cmp_2000px.jpg",
+			caption: ""
+		}
+    ],
+    messages: [
+		"<h3>Welcome to <a href='https://twitter.com/intent/tweet?button_hashtag=NFC2019'>#NFC2019</a>!</h3>",
+	]
+};
 
 var Events = {
     events: defaultEvents,
@@ -62,7 +82,7 @@ var Events = {
                 console.warn("Couldn't get events from " + settings.eventURLs[i]);
                 if (i+1 < settings.eventURLs.length) {
                     /* try again with next URL in list */
-                    eventObj.updateScheduleData(i+1);
+                    eventObj.updateEventData(i+1);
                 } else {
                     console.error("Failed to get new events, URL list exhausted.");
                 }
@@ -113,4 +133,4 @@ var Settings = {
         }
         return this.settings;
     }
-}
+};
