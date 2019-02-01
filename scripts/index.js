@@ -7,31 +7,31 @@ var eventData = [];
 var defaultBaseAPIURL = "https://games-api-staging.nordicfuzzcon.org/schedule/v1";
 
 var defaultScheduleData = {
-		settings: {
-			zoom: 1.3,
-			sliderInterval: 10000,
-			sliderTransition: 500,
-			baseApiUrl: defaultBaseAPIURL,
-			getEventsURL: defaultBaseAPIURL + "/events",
+	settings: {
+		zoom: 1,
+		sliderInterval: 10000,
+		sliderTransition: 500,
+		baseApiUrl: defaultBaseAPIURL,
+		getEventsURL: defaultBaseAPIURL + "/events",
+	},
+	messages: [
+		"<h3>Welcome to <a href='https://twitter.com/intent/tweet?button_hashtag=NFC2019'>#NFC2019</a>!</h3>",
+	],
+	sliderImgs: [
+		{
+			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/placeholder_1.jpg",
+			caption: ""
 		},
-		messages: [
-			"<h3>Welcome to <a href='https://twitter.com/intent/tweet?button_hashtag=NFC2019'>#NFC2019</a>!</h3>",
-		],
-		sliderImgs: [
-			{
-				url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/placeholder_1.jpg",
-				caption: ""
-			},
-			{
-				url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/background/nfc-banner_md.jpg",
-				caption: ""
-			},
-			{
-				url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/background/Background_cmp_2000px.jpg",
-				caption: ""
-			}
-		]
-	};
+		{
+			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/background/nfc-banner_md.jpg",
+			caption: ""
+		},
+		{
+			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/background/Background_cmp_2000px.jpg",
+			caption: ""
+		}
+	]
+};
 
 var scheduleData = defaultScheduleData;
 
