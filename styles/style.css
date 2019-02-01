@@ -168,3 +168,15 @@
 		background-position: bottom center;
 	background-repeat: no-repeat
 }
+
+.main-footer #latest-tweet {
+    margin-bottom: 0em;
+    z-index: 50;
+    position: relative;
+	width: 100%;
+}
+
+#latest-tweet .tweet {
+	max-height: 8.25em;
+	overflow-y: auto;
+}
