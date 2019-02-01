@@ -64,30 +64,43 @@ function updateSchedule() {
 	console.log(Events.get());
 
 	var tweetReady = function(tweetstring){
-		var output = $('<div class="tweet-container"/>');
-		output.append('<div class="msg-container"></div>');
-		var tweet = $('<div/>').html(tweetstring).contents();
-		tweet.find(".twitter_reply_icon").html('<i class="fa fa-comment" aria-hidden="true"></i>');
-		tweet.find(".twitter_fav_icon").html('<i class="fa fa-heart" aria-hidden="true"></i>');
-		tweet.find(".twitter_retweet_icon").html('<i class="fa fa-retweet" aria-hidden="true"></i>');
-		tweet.parent().find(".timePosted").contents().appendTo(tweet.parent().find(".user > div"));
-		tweet.find("[data-scribe='element:screen_name']").hide();
+		console.log(tweetstring);
+		var outputContainer = $('<div class="tweets-container"/>');
 		var outputSelector = "#announcements-container";
-		output.find(".msg-container").append(tweet.parent().find(".user, .tweet, .interact"));
-		output.find(".interact").before(tweet.parent().find(".media"));
-		output.find(".user").html(output.find(".user").html().replace(/Posted on /g, "on "));
-		$(outputSelector).html(output);
+		for (var i = 0; i < tweetstring.length; i++) {
+			var output = $('<div/>');
+			output.append('<div class="msg-container panel panel-primary"></div>');
+			var tweet = $('<div/>').html(tweetstring[i]).contents();
+			tweet.find(".twitter_reply_icon").html('<i class="fa fa-comment" aria-hidden="true"></i>');
+			tweet.find(".twitter_fav_icon").html('<i class="fa fa-heart" aria-hidden="true"></i>');
+			tweet.find(".twitter_retweet_icon").html('<i class="fa fa-retweet" aria-hidden="true"></i>');
+			tweet.parent().find(".timePosted").contents().appendTo(tweet.parent().find(".user > div"));
+			tweet.find("[data-scribe='element:screen_name']").hide();
+			output.find(".msg-container").append(tweet.parent().find(".user, .tweet, .interact"));
+			output.find(".interact").before(tweet.parent().find(".media"));
+			output.find(".user").addClass("panel-heading");
+			output.find(".tweet").addClass("panel-body");
+			output.find(".interact").hide();
+			outputContainer.append(output);
+		}
+		$(outputSelector).html(outputContainer);
 	};
 
 	var configProfile = {
-		"profile": {"screenName": 'nordicfuzzcon'},
+		"profile": {"screenName": 'LiveFuzz'},
 		"domId": 'announcements-container',
-		"maxTweets": 1,
+		"maxTweets": 5,
 		"enableLinks": true,
 		"customCallback": tweetReady,
 		"showUser": true,
 		"showTime": true,
 		"showImages": true,
+		"dateFunction": function(date){
+			console.log(date);
+			console.log(date.getTime());
+			console.log(Date.now());
+			return moment.duration(date.getTime() - Date.now(), "milliseconds").humanize(true);
+		},
 		"lang": 'en'
 	};
 	
