@@ -11,10 +11,6 @@
 	margin-top: 0.1em;
 }
 
-.schedule #info-panel .panel-footer {
-	
-}
-
 .schedule #info-panel .list-group-item {
     border: 0px none transparent;
 }
@@ -47,10 +43,6 @@
 
 .live.schedule #schedule-btn {
 	display: none;
-}
-
-.schedule #info-panel .list-group-item:nth-child(2) {
-	border-bottom: 0 none transparent;
 }
 
 .schedule #info-panel .list-group-item {
@@ -121,6 +113,18 @@
 	overflow-y: auto;
 	position: absolute;
 	top: 38px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: white;
+}
+
+.slider-container {
+	border: 1em solid white;
+	box-shadow: 0 0 2em 1em white;
+	background: white;
+	position: absolute;
+	top: 66%;
 	left: 0;
 	right: 0;
 	bottom: 0;
