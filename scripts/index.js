@@ -79,18 +79,6 @@ loadSettings();
 
 renderMessages();
 
-function getScheduleData() {
-	
-}
-
-function populateLocalData(scheduleData) {
-	
-}
-
-function renderLocalData() {
-	
-}
-
 function updateSchedule() {
 	var firstEvent = $(".table tr:first");
 	firstEvent.fadeOut(500, function(){
@@ -101,6 +89,10 @@ function updateSchedule() {
 			$(".table tr").not(".success").first().addClass("success");
 		}, 5000+(Math.random()-0.5)*4000);
 	});
+
+	console.log(Settings.get());
+
+	console.log(Events.get());
 }
 
 $('#scroller').slick({
