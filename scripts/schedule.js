@@ -35,8 +35,8 @@ var defaultSettings = {
     eventsLifetime: 10 * 1000, // best-before time for schedule data, in ms
     settingsLifetime: 300 * 1000, // best-before time for schedule settings, in ms
     tweetRefreshInterval: 60 * 1000, // twitter fetch interval, in ms
-    settingsURLs: ["/data/settings.json"], // priority list of URLs to fetch settings from
-    eventURLs: ["https://games-api-staging.nordicfuzzcon.org/schedule/v1/events", "/data/events.json"], // priority list of URLs to fetch event data from
+    settingsURLs: ["data/settings.json"], // priority list of URLs to fetch settings from
+    eventURLs: ["https://games-api-staging.nordicfuzzcon.org/schedule/v1/events", "./data/events.json"], // priority list of URLs to fetch event data from
     eventApiKey: "staging-read",
     zoom: 1.3, // default zoom level, useful for scaling to fit to lobby displays
     sliderInterval: 10 * 1000, // slide change interval, in ms
@@ -44,19 +44,19 @@ var defaultSettings = {
     twitterUsername: "LiveFuzz",
     sliderImgs: [
 		{
-			url: "../img/slider/DSC02965-PANO-3-2.jpg",
+			url: "img/slider/DSC02965-PANO-3-2.jpg",
 			caption: ""
 		},
 		{
-			url: "../img/slider/DSC02965-PANO-2-1.jpg",
+			url: "img/slider/DSC02965-PANO-2-1.jpg",
 			caption: ""
 		},
 		{
-			url: "../img/slider/DSC02965-PANO-3-1.jpg",
+			url: "img/slider/DSC02965-PANO-3-1.jpg",
 			caption: ""
 		},
 		{
-			url: "../img/slider/DSC02965-PANO-4-1.jpg",
+			url: "img/slider/DSC02965-PANO-4-1.jpg",
 			caption: ""
 		},
 		{
