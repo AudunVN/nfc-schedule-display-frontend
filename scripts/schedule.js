@@ -58,6 +58,10 @@ var defaultSettings = {
 		{
 			url: "img/slider/DSC02965-PANO-4-1.jpg",
 			caption: ""
+        },
+		{
+			url: "img/slider/tumblr_pj2sw5tDL71t1ig6no1_640.gif",
+			caption: ""
 		},
 		{
 			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/placeholder_1.jpg",
