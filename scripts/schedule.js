@@ -116,7 +116,7 @@ var Settings = {
             type: 'GET',
             dataType: 'json',
             success: function(data) {
-                console.log("Updated settings from "  + settings.eventURLs[i]);
+                console.log("Updated settings from "  + settings.settingsURLs[i]);
                 setObj.settings = data;
                 setObj.lastUpdate = Date.now();
             },

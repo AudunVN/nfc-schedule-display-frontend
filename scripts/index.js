@@ -40,7 +40,7 @@ var configProfile = {
 
 function updateClock() {
 	$('#clock').fitText(1.3);
-	$('#clock').html(moment().format('D. MMMM YYYY H:mm:ss'));
+	$('#clock').html(moment().format('MMMM Do HH:mm:ss'));
 }
 
 var currentImgIndex = 0;
