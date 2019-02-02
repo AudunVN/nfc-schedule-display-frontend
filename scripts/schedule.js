@@ -44,6 +44,22 @@ var defaultSettings = {
     twitterUsername: "LiveFuzz",
     sliderImgs: [
 		{
+			url: "../img/slider/DSC02965-PANO-3-2.jpg",
+			caption: ""
+		},
+		{
+			url: "../img/slider/DSC02965-PANO-2-1.jpg",
+			caption: ""
+		},
+		{
+			url: "../img/slider/DSC02965-PANO-3-1.jpg",
+			caption: ""
+		},
+		{
+			url: "../img/slider/DSC02965-PANO-4-1.jpg",
+			caption: ""
+		},
+		{
 			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/placeholder_1.jpg",
 			caption: ""
 		},
