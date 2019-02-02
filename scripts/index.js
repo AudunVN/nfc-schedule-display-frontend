@@ -99,6 +99,17 @@ function setEventStates() {
 	});
 }
 
+function renderTagsToClassList(tagArray) {
+    if (tagArray) {
+        var tagsString = "";
+        for (var i = 0; i < tagArray.length; i++) {
+			tagsString += "event_" + tagArray[i] + " ";
+        }
+        return tagsString;
+    }
+    return "";
+}
+
 var previousEvents = [];
 
 function updateSchedule() {
@@ -112,7 +123,7 @@ function updateSchedule() {
 		for (var i = 0; i < events.length; i++) {
 			var event = events[i];
 			var eventRow = $("" + 
-			"<tr data-start='" + moment(event.startTime).tz(timezone).second(0).valueOf() + "' data-end='" + moment(event.endTime).tz(timezone).second(0).valueOf() + "'><td>" +
+			"<tr class='" + renderTagsToClassList(event.eventTags)  + "' data-start='" + moment(event.startTime).tz(timezone).second(0).valueOf() + "' data-end='" + moment(event.endTime).tz(timezone).second(0).valueOf() + "'><td>" +
 				event.title +
 			"</td><td>" +
 				event.location +
