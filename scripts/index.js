@@ -1,6 +1,9 @@
+/* static settings */
 var dateTimeInputFormat = "YYYY-MM-DD[T]HH:mm:ss[Z]";
 var timezone = "Europe/Stockholm";
+/*end static settings */
 
+/* twitter embed setup */
 var tweetReady = function(tweetstring){
 	var outputContainer = $('<div class="tweets-container"/>');
 	var outputSelector = "#announcements-container";
@@ -37,13 +40,32 @@ var configProfile = {
 	},
 	"lang": 'en'
 };
+/* end twitter embed setup */
+
+/* helper functions and objects */
+function renderTagsToClassList(tagArray) {
+    if (tagArray) {
+        var tagsString = "";
+        for (var i = 0; i < tagArray.length; i++) {
+			tagsString += "event_" + tagArray[i] + " ";
+        }
+        return tagsString;
+    }
+    return "";
+}
+
+/* used in updateSliders() to keep track of the current slide */
+var currentImgIndex = 0;
+
+/* used in updateSchedule() to see whether the schedule needs to be rendered again */
+var previousEvents = [];
+
+/* end helper functions and objects */
 
 function updateClock() {
 	$('#clock').fitText(1.3);
 	$('#clock').html(moment().format('MMMM Do HH:mm:ss'));
 }
-
-var currentImgIndex = 0;
 
 function updateSliders() {
 	var availableHeight = $(".row > :first-child .panel-content-wrapper").outerHeight() - $(".row > :first-child .list-group-item:nth-child(1)").outerHeight() - $(".row > :first-child .list-group-item:nth-child(2)").outerHeight();
@@ -99,19 +121,6 @@ function setEventStates() {
 	});
 }
 
-function renderTagsToClassList(tagArray) {
-    if (tagArray) {
-        var tagsString = "";
-        for (var i = 0; i < tagArray.length; i++) {
-			tagsString += "event_" + tagArray[i] + " ";
-        }
-        return tagsString;
-    }
-    return "";
-}
-
-var previousEvents = [];
-
 function updateSchedule() {
 	var events = Events.get();
 	if (JSON.stringify(events) != JSON.stringify(previousEvents)) {
@@ -155,6 +164,8 @@ function updateTweets() {
 	twitterFetcher.fetch(configProfile);
 	console.log("Updated tweets");
 }
+
+/* init */
 
 loadSettings();
 

@@ -62,6 +62,7 @@ var defaultSettings = {
 	]
 };
 
+/* to aid with copy-pasting it over to settings.json */
 console.log(JSON.stringify(defaultSettings));
 
 var Events = {
