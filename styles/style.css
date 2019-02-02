@@ -7,6 +7,10 @@
 	padding: 1em;
 }
 
+#clock {
+	padding: 0.25em;
+}
+
 .schedule #info-panel h4 {
 	margin-top: 0.1em;
 }

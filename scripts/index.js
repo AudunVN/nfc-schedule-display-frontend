@@ -85,20 +85,34 @@ function loadSettings() {
 	console.log("Loaded settings");
 }
 
+function setEventStates() {
+	$(".schedule .table tbody tr").each(function(index, object) {
+		if (parseInt($(this).data("end")) < Date.now()) {
+			if ($(this).is(":visible")) {
+				$(this).fadeOut(500);
+			} else {
+				$(this).hide();
+			}
+		} else if (parseInt($(this).data("start")) < Date.now()) {
+			$(this).addClass("success");
+		}
+	});
+}
+
 var previousEvents = [];
 
 function updateSchedule() {
 	var events = Events.get();
-	console.log(events);
-	if (events != previousEvents) {
+	if (JSON.stringify(events) != JSON.stringify(previousEvents)) {
 		console.log("Rendering latest events");
 		previousEvents = events;
 		$(".schedule .table tbody").hide();
 		$(".schedule .table tbody").html("");
+		var previousEvent = {};
 		for (var i = 0; i < events.length; i++) {
 			var event = events[i];
 			var eventRow = $("" + 
-			"<tr><td>" +
+			"<tr data-start='" + moment(event.startTime).tz(timezone).second(0).valueOf() + "' data-end='" + moment(event.endTime).tz(timezone).second(0).valueOf() + "'><td>" +
 				event.title +
 			"</td><td>" +
 				event.location +
@@ -109,19 +123,21 @@ function updateSchedule() {
 			"</td></tr>");
 			if (moment(event.endTime).tz(timezone).valueOf() - Date.now() < 0) {
 				eventRow.hide();
+			} else if (moment(previousEvent.startTime).tz(timezone).format("dddd [()]MMM Do[)]") != moment(event.startTime).tz(timezone).format("dddd [()]MMM Do[)]")) {
+				/* new day! add a title */
+				var dayRow = $("" + 
+				"<tr data-end='" + moment(event.startTime).hour(0).minute(0).second(0) + "' class='warning text-center'><td colspan=4>" +
+					moment(event.startTime).tz(timezone).format("dddd [(]MMM Do[)]") +
+				"</td></tr>");
+				$(".schedule .table tbody").append(dayRow);
 			}
+			previousEvent = event;
 			$(".schedule .table tbody").append(eventRow);
 		}
+		setEventStates();
 		$(".schedule .table tbody").show();
 	}
-	firstEvent.fadeOut(500, function(){
-		firstEvent.removeClass("success");
-		firstEvent.show();
-		setTimeout(function(){
-			$(".table tr").not(".success").first().addClass("success");
-		}, 100+(Math.random()-0.5)*100);
-	});
-	console.log("Updated schedule");
+	setEventStates();
 }
 
 function updateTweets() {	

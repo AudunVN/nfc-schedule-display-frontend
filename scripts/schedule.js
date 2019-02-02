@@ -32,7 +32,7 @@ var defaultEvents = [
 ];
 
 var defaultSettings = {
-    eventsLifetime: 300 * 1000, // best-before time for schedule data, in ms
+    eventsLifetime: 10 * 1000, // best-before time for schedule data, in ms
     settingsLifetime: 300 * 1000, // best-before time for schedule settings, in ms
     tweetRefreshInterval: 60 * 1000, // twitter fetch interval, in ms
     settingsURLs: ["/data/settings.json"], // priority list of URLs to fetch settings from
