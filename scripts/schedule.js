@@ -1,10 +1,10 @@
 var defaultEvents = [
     {
         "eventId": 101,
-        "title": "Dead Dog Dance",
-        "description": "The Dead Dog Dance...",
-        "location": "Ball Room",
-        "organizers": "StarFoxCoon",
+        "title": "Test of locally stored event data",
+        "description": "Yes",
+        "location": "471.no",
+        "organizers": "Me",
         "startTime": "2019-03-03T20:00:00Z",
         "endTime": "2019-03-04T02:00:00Z",
         "lastUpdate": "2019-01-21T19:05:16.181215Z",
@@ -15,20 +15,20 @@ var defaultEvents = [
         ]
     },
     {
-        "eventId": 137,
-        "title": "Glögg and fika sampling",
-        "description": "7 bouts of glögg sampling with 20 persons in each",
-        "location": "8XX",
-        "organizers": "Fredrix Swiftnote",
-        "startTime": "2019-03-03T21:00:00Z",
-        "endTime": "2019-03-03T22:30:00Z",
-        "lastUpdate": "2019-01-21T19:05:16.397372Z",
+        "eventId": 101,
+        "title": "Internal test event",
+        "description": "Yes",
+        "location": "471.no",
+        "organizers": "Me",
+        "startTime": "2019-03-03T20:00:00Z",
+        "endTime": "2019-03-04T02:00:00Z",
+        "lastUpdate": "2019-01-21T19:05:16.181215Z",
         "cancelled": false,
         "eventTags": [
-            "theme",
-            "food"
+            "main",
+            "dance"
         ]
-    }
+    },
 ];
 
 var defaultSettings = {
