@@ -183,3 +183,7 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+
+.event_cancelled {
+	text-decoration: line-through;
+}

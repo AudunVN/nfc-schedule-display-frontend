@@ -151,6 +151,9 @@ function updateSchedule() {
 				"</td></tr>");
 				$(".schedule .table tbody").append(dayRow);
 			}
+			if (event.title.toLowerCase().indexOf("cancelled") != -1) {
+				eventRow.addClass("event_cancelled");
+			}
 			previousEvent = event;
 			$(".schedule .table tbody").append(eventRow);
 		}
