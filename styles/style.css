@@ -166,6 +166,12 @@
 	vertical-align: middle;
 }
 
+.media {
+	text-align: center;
+    margin-top: -0.75em;
+    padding-bottom: 0.5em;
+}
+
 .row > *:first-child > .panel {
 	background: white;
 	background-size: 100%;

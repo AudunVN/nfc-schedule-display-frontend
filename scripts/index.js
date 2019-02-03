@@ -121,6 +121,9 @@ function loadSettings() {
 		if (settings.zoom) {
 			$(".schedule").css("zoom", settings.zoom);
 		}
+		if (Settings.get().debug && Settings.get().timeTravel) {
+			chronokinesis.travel(Settings.get().timeTravel);
+		}		
 		previousSettings = settings;
 		console.log("Loaded settings");
 	}
