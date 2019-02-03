@@ -43,7 +43,7 @@ var defaultSettings = {
     sliderTransition: 0.5 * 1000, // slide transition length, in ms
     twitterUsername: "LiveFuzz",
     debug: true, // enables time travel and other things that certainly shouldn't be live in production
-    timeTravel: new Date(2019,1,26,12,59), // datetime or moment, useful for light time travel if you want to test the schedule
+    timeTravel: new Date(2019,1,27,16,29,45), // datetime or moment, useful for light time travel if you want to test the schedule
     sliderImgs: [
 		{
 			url: "img/slider/DSC02965-PANO-3-2.jpg",
