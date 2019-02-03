@@ -57,8 +57,14 @@ function renderTagsToClassList(tagArray) {
 /* used in updateSliders() to keep track of the current slide */
 var currentImgIndex = 0;
 
+/* used in updateSliders() to see whether the messages need to be rendered again */
+var previousMessages = [];
+
 /* used in updateSchedule() to see whether the schedule needs to be rendered again */
 var previousEvents = [];
+
+/* used in loadSettings() to check whether settings need to be applied again */
+var previousSettings = {};
 
 /* end helper functions and objects */
 
@@ -68,24 +74,33 @@ function updateClock() {
 }
 
 function updateSliders() {
-	var availableHeight = $(".row > :first-child .panel-content-wrapper").outerHeight() - $(".row > :first-child .list-group-item:nth-child(1)").outerHeight() - $(".row > :first-child .list-group-item:nth-child(2)").outerHeight();
 	var imgSrc = Settings.get().sliderImgs[currentImgIndex].url;
+	
 	currentImgIndex++;
 	if (currentImgIndex > Settings.get().sliderImgs.length - 1) {
 		currentImgIndex = 0;
 	}
+
+	var availableHeight = $(".row > :first-child .panel-content-wrapper").outerHeight() - $(".row > :first-child .list-group-item:nth-child(1)").outerHeight() - $(".row > :first-child .list-group-item:nth-child(2)").outerHeight();
 	if (availableHeight > 0) {
 		$("#image-display").height(availableHeight);
 		$("#image-display .next-img").css("background-image", "url('" + imgSrc + "')");
 		$(".slide-img").toggleClass("current-img");
 		$(".slide-img").toggleClass("next-img");
 	}
-	$('#scroller').slick('next');
+
+	var messages = Settings.get().messages;
+	if (JSON.stringify(previousMessages) != JSON.stringify(messages)) {
+		renderMessages(messages);
+		previousMessages = messages;
+	} else {
+		$('#scroller').slick('next');
+	}
 }
 
-function renderMessages() {
+function renderMessages(messages) {
+	$("#scroller.slick-initialized").slick("unslick");
 	$("#scroller").html("");
-	var messages = Settings.get().messages;
 	for (i = 0; i < messages.length; i++) {
 		$("#scroller").append('<div class="scroll-content">' + messages[i] + '</div>');
 	}
@@ -101,10 +116,14 @@ function renderMessages() {
 }
 
 function loadSettings() {
-	if (Settings.get().zoom) {
-		$(".schedule").css("zoom", Settings.get().zoom);
+	var settings = Settings.get();
+	if (JSON.stringify(previousSettings) != JSON.stringify(settings)) {
+		if (settings.zoom) {
+			$(".schedule").css("zoom", settings.zoom);
+		}
+		previousSettings = settings;
+		console.log("Loaded settings");
 	}
-	console.log("Loaded settings");
 }
 
 function setEventStates() {
@@ -168,20 +187,42 @@ function updateTweets() {
 	console.log("Updated tweets");
 }
 
+/* timers */
+
+function runClock() {
+	setTimeout(runClock, 1000);
+	updateClock();
+}
+
+function runSchedule() {
+	setTimeout(runSchedule, 1000);
+	updateSchedule();
+}
+
+function runLoadSettings() {
+	setTimeout(runLoadSettings, 1000);
+	loadSettings();
+}
+
+/* these are timed using a different method, as the intervals may change */
+function runSlider() {
+	setTimeout(runSlider, Settings.get().sliderInterval);
+	updateSliders();
+}
+
+function runTweets() {
+	setTimeout(runTweets, Settings.get().tweetRefreshInterval);
+	updateTweets();
+}
+
 /* init */
 
-loadSettings();
+runLoadSettings();
 
-renderMessages();
+runClock();
 
-updateSliders();
+runSlider();
 
-updateTweets();
+runTweets();
 
-setInterval(updateClock, 1000);
-
-setInterval(updateSchedule, 1000);
-
-setInterval(updateSliders, Settings.get().sliderInterval);
-
-setInterval(updateTweets, Settings.get().tweetRefreshInterval);
+runSchedule();

@@ -147,7 +147,7 @@
 
 #image-display .slide-img {
 	background-size: contain;
-	background-position: bottom center;
+	background-position: center center;
 	background-repeat: no-repeat;
 	position: absolute;
 	top: 0;
