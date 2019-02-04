@@ -4,7 +4,7 @@ var timezone = "Europe/Stockholm";
 /*end static settings */
 
 /* twitter embed setup */
-var tweetReady = function(tweetstring){
+var tweetReady = function(tweetstring) {
 	var outputContainer = $('<div class="tweets-container"/>');
 	var outputSelector = "#announcements-container";
 	for (var i = 0; i < tweetstring.length; i++) {
@@ -52,6 +52,10 @@ function renderTagsToClassList(tagArray) {
         return tagsString;
     }
     return "";
+}
+
+function getDayTitle(time) {
+	return moment(time).tz(timezone).format("dddd [(]MMM Do[)]");
 }
 
 /* used in updateSliders() to keep track of the current slide */
@@ -123,7 +127,7 @@ function loadSettings() {
 		}
 		if (Settings.get().debug && Settings.get().timeTravel) {
 			chronokinesis.travel(Settings.get().timeTravel);
-		}		
+		}
 		previousSettings = settings;
 		console.log("Loaded settings");
 	}
@@ -145,16 +149,22 @@ function setEventStates() {
 
 function updateSchedule() {
 	var events = Events.get();
+
 	if (JSON.stringify(events) != JSON.stringify(previousEvents)) {
 		console.log("Rendering latest events");
 		previousEvents = events;
+
 		$(".schedule .table tbody").hide();
 		$(".schedule .table tbody").html("");
+
 		var previousEvent = {};
 		for (var i = 0; i < events.length; i++) {
 			var event = events[i];
+
+			var startTime = moment(event.startTime).tz(timezone).second(0).valueOf();
+			var endTime =  moment(event.endTime).tz(timezone).second(0).valueOf();
 			var eventRow = $("" + 
-			"<tr class='" + renderTagsToClassList(event.eventTags)  + "' data-start='" + moment(event.startTime).tz(timezone).second(0).valueOf() + "' data-end='" + moment(event.endTime).tz(timezone).second(0).valueOf() + "'><td>" +
+			"<tr class='" + renderTagsToClassList(event.eventTags)  + "' data-start='" + startTime + "' data-end='" +endTime + "'><td>" +
 				event.title +
 			"</td><td>" +
 				event.location +
@@ -163,25 +173,29 @@ function updateSchedule() {
 			"</td><td>" +
 				moment(event.endTime).tz(timezone).format("HH:mm") + 
 			"</td></tr>");
+
 			if (moment(event.endTime).tz(timezone).valueOf() - Date.now() < 0) {
 				eventRow.hide();
-			} else if (moment(previousEvent.startTime).tz(timezone).format("dddd [()]MMM Do[)]") != moment(event.startTime).tz(timezone).format("dddd [()]MMM Do[)]")) {
+			} else if (getDayTitle(previousEvent.startTime) != getDayTitle(event.startTime)) {
 				/* new day! add a title */
 				var dayRow = $("" + 
 				"<tr data-end='" + moment(event.startTime).hour(0).minute(0).second(0) + "' class='warning text-center'><td colspan=4>" +
-					moment(event.startTime).tz(timezone).format("dddd [(]MMM Do[)]") +
+					getDayTitle(event.startTime) +
 				"</td></tr>");
 				$(".schedule .table tbody").append(dayRow);
 			}
+
 			if (event.title.toLowerCase().indexOf("cancelled") != -1) {
 				eventRow.addClass("event_cancelled");
 			}
+
 			previousEvent = event;
 			$(".schedule .table tbody").append(eventRow);
 		}
 		setEventStates();
 		$(".schedule .table tbody").show();
 	}
+
 	setEventStates();
 }
 
