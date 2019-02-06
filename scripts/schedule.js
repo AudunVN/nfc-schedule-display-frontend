@@ -120,6 +120,7 @@ var Events = {
                     }
                 },
                 always: function() {
+                    console.log("always?");
                     eventObj.getInProgress = false;
                 }
             });
@@ -166,6 +167,7 @@ var Settings = {
                     }
                 },
                 always: function() {
+                    console.log("always?");
                     setObj.getInProgress = false;
                 }
             });
