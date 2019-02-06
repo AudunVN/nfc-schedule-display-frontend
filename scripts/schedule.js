@@ -119,8 +119,7 @@ var Events = {
                         console.error("Failed to get new events, URL list exhausted.");
                     }
                 },
-                always: function() {
-                    console.log("always?");
+                complete: function() {
                     eventObj.getInProgress = false;
                 }
             });
@@ -166,8 +165,7 @@ var Settings = {
                         console.error("Failed to get new settings, URL list exhausted.");
                     }
                 },
-                always: function() {
-                    console.log("always?");
+                complete: function() {
                     setObj.getInProgress = false;
                 }
             });
