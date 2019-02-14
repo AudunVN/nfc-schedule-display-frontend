@@ -33,11 +33,13 @@ var defaultEvents = [
 
 var baseApiUrl = "https://games-api-staging.nordicfuzzcon.org/schedule/v1/events";
 var apiKey = "staging-read";
+var settingsUrl = "data/test_settings.json";
 
 if (window.location.href.indexOf("test") == -1) {
     /* switch to production */
     baseApiUrl = "https://games-api.nordicfuzzcon.org/schedule/v1/events";
     apiKey = "f18f8411-42ba-4587-aed0-90d55bcb3b49";
+    settingsUrl = "data/settings.json";
 } else {
     document.querySelector("body").classList.add("test-mode");
     document.querySelector(".test-mode-warning").classList.remove("hidden");
@@ -47,7 +49,7 @@ var defaultSettings = {
     eventsLifetime: 10 * 1000, // best-before time for schedule data, in ms
     settingsLifetime: 10 * 1000, // best-before time for schedule settings, in ms
     tweetRefreshInterval: 60 * 1000, // twitter fetch interval, in ms
-    settingsURLs: ["data/settings.json"], // priority list of URLs to fetch settings from
+    settingsURLs: [settingsUrl], // priority list of URLs to fetch settings from
     eventURLs: [baseApiUrl, "./data/events.json"], // priority list of URLs to fetch event data from
     eventApiKey: apiKey,
     zoom: 1.3, // default zoom level, useful for scaling to fit to lobby displays
