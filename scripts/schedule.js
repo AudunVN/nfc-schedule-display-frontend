@@ -40,7 +40,7 @@ if (window.location.href.indexOf("test") == -1) {
     apiKey = "f18f8411-42ba-4587-aed0-90d55bcb3b49";
 } else {
     document.querySelector("body").classList.add("test-mode");
-    document.querySelector(".test-mode-warning").classList.remove("d-none");
+    document.querySelector(".test-mode-warning").classList.remove("hidden");
 }
 
 var defaultSettings = {
