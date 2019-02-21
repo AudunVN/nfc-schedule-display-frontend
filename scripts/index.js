@@ -70,6 +70,9 @@ var previousEvents = [];
 /* used in loadSettings() to check whether settings need to be applied again */
 var previousSettings = {};
 
+/* used in loadSettings() to see whether we should reload */
+var lastPageLoad = Date.now();
+
 /* end helper functions and objects */
 
 function updateClock() {
@@ -130,6 +133,20 @@ function loadSettings() {
 		}
 		previousSettings = settings;
 		console.log("Loaded settings");
+	}
+
+	if ((Date.now() > settings.reloadBy) && (lastPageLoad < settings.reloadBy)) {
+		$.ajax({
+			url: window.location.href,
+			type: 'GET',
+			success: function(data) {
+				console.log("Able to load schedule page, reloading");
+				location.reload();
+			},
+			error: function() {
+				console.warn("Main page unavailable, unable to reload");
+			}
+		});
 	}
 }
 
