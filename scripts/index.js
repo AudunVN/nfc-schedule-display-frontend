@@ -4,11 +4,11 @@ var uid = new ShortUniqueId();
 var deviceId = "not-set";
 
 if (typeof(Storage) !== "undefined") {
-	if (localStorage.getItem("device_id")) {
-		deviceId = localStorage.getItem("device_id");
+	if (localStorageFallback.getItem("device_id")) {
+		deviceId = localStorageFallback.getItem("device_id");
 	} else {
 		deviceId = "471-" + uid.randomUUID(6);
-		localStorage.setItem("device_id", deviceId);
+		localStorageFallback.setItem("device_id", deviceId);
 	}
 } else {
 	deviceId = "x-" + uid.randomUUID(6);
