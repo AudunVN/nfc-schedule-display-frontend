@@ -22,6 +22,7 @@ setTimeout(function(){ document.querySelector("#device-id").style.display = "non
 /* static settings */
 var dateTimeInputFormat = "YYYY-MM-DD[T]HH:mm:ss[Z]";
 var timezone = "Europe/Stockholm";
+$.ajaxSetup({ cache: false });
 /*end static settings */
 
 /* twitter embed setup */

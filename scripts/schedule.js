@@ -1,3 +1,5 @@
+$.ajaxSetup({ cache: false });
+
 var defaultEvents = [
     {
         "eventId": 101,
