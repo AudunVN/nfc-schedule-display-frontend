@@ -143,6 +143,7 @@ var Events = {
                     console.warn("Couldn't get events from " + settings.eventURLs[i]);
                     if (i+1 < settings.eventURLs.length) {
                         /* try again with next URL in list */
+                        eventObj.getInProgress = false;
                         eventObj.updateEventData(i+1);
                     } else {
                         console.error("Failed to get new events, URL list exhausted.");
@@ -189,6 +190,7 @@ var Settings = {
                     console.warn("Couldn't get settings from " + settings.settingsURLs[i]);
                     if (i+1 < settings.settingsURLs.length) {
                         /* try again with next URL in list */
+                        setObj.getInProgress = false;
                         setObj.updateSettings(i+1);
                     } else {
                         console.error("Failed to get new settings, URL list exhausted.");
