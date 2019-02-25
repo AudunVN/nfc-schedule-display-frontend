@@ -80,7 +80,7 @@
 			// Track basic JavaScript errors
 			window.addEventListener('error', function(e) {
 				gtag('event', 'exception', {
-					'description': e.message ' at ' + e.filename + ' : ' + e.lineno,
+					'description': e.message + ' at ' + e.filename + ' : ' + e.lineno,
 					'fatal': false
 				});
 			});
@@ -88,7 +88,7 @@
 			// Track AJAX errors (jQuery API)
 			$(document).ajaxError(function(e, request, settings) {
 				gtag('event', 'exception', {
-					'description': e.result ' at ' + setting.url,
+					'description': e.result + ' at ' + setting.url,
 					'fatal': false
 				});
 			});
