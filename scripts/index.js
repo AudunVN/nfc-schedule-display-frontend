@@ -3,14 +3,15 @@ var uid = new ShortUniqueId();
 
 var deviceId = "not-set";
 
-if (typeof(Storage) !== "undefined") {
+try {
 	if (localStorageFallback.getItem("device_id")) {
 		deviceId = localStorageFallback.getItem("device_id");
 	} else {
 		deviceId = "471-" + uid.randomUUID(6);
 		localStorageFallback.setItem("device_id", deviceId);
 	}
-} else {
+}
+catch(err) {
 	deviceId = "x-" + uid.randomUUID(6);
 }
 
