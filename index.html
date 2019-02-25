@@ -92,6 +92,11 @@
 					'fatal': false
 				});
 			});
+			gtag('event', 'exception', {
+				'description': 'error_description',
+				'fatal': false   // set to true if the error is fatal
+			});
+			confole.god()
 		</script>
 	</body>
 </html>
