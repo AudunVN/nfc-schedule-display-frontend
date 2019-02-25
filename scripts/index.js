@@ -167,9 +167,9 @@ function renderMessages(messages) {
 function loadSettings() {
 	var settings = Settings.getForDevice(deviceId);
 	if (JSON.stringify(previousSettings) != JSON.stringify(settings)) {
-		if (settings.zoom) {
+		/*if (settings.zoom) {
 			$(".schedule").css("zoom", settings.zoom);
-		}
+		}*/
 		if (settings.view && settings.view != "auto") {
 			if (settings.view == "portrait") {
 				$(".schedule").removeClass("landscape");
