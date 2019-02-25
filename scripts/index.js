@@ -16,7 +16,7 @@ if (typeof(Storage) !== "undefined") {
 
 document.querySelector("#device-id").innerHTML = "<h3 class='text-center'>" + deviceId + "</h3>";
 
-setTimeout(function(){ document.querySelector("#device-id").className = "hide"; }, 10000);
+setTimeout(function(){ document.querySelector("#device-id").style.display = "none"; }, 10000);
 /* end get/set device id */
 
 /* static settings */
@@ -105,7 +105,9 @@ var lastPageLoad = Date.now();
 /* end helper functions and objects */
 
 function updateClock() {
-	$('#clock').fitText(1.3);
+	if ($("#clock").hasOwnProperty('fitText')) {
+		$('#clock').fitText(1.3);
+	}
 	$('#clock').html(moment().format('MMMM Do HH:mm:ss'));
 }
 
@@ -167,9 +169,9 @@ function renderMessages(messages) {
 function loadSettings() {
 	var settings = Settings.getForDevice(deviceId);
 	if (JSON.stringify(previousSettings) != JSON.stringify(settings)) {
-		/*if (settings.zoom) {
+		if (settings.zoom) {
 			$(".schedule").css("zoom", settings.zoom);
-		}*/
+		}
 		if (settings.view && settings.view != "auto") {
 			if (settings.view == "portrait") {
 				$(".schedule").removeClass("landscape");
@@ -311,8 +313,12 @@ runLoadSettings();
 
 runClock();
 
-runSlider();
+if (document.querySelector(".slider-container")) {
+	runSlider();
+}
 
-runTweets();
+if (document.querySelector("#announcements-container")) {
+	runTweets();
+}
 
 runSchedule();
