@@ -79,11 +79,21 @@
 		<script>
 			// Track basic JavaScript errors
 			window.addEventListener('error', function(e) {
+				console.log("oh no");
 				gtag('event', 'exception', {
 					'description': e.message + ' at ' + e.filename + ' : ' + e.lineno,
 					'fatal': false
 				});
 			});
+
+			window.onerror = function(message, source, lineno, colno, error) {
+				console.log("oh no");
+				gtag('event', 'exception', {
+					'description': message + ' at ' + source + ' : ' + lineno + " -> " + colno,
+					'fatal': false
+				});
+			});
+
 
 			// Track AJAX errors (jQuery API)
 			$(document).ajaxError(function(e, request, settings) {
