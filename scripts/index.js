@@ -87,8 +87,6 @@ function getOverflow(element) {
 	return (element.scrollWidth - element.offsetWidth);
 }
 
-
-
 /* used in updateSliders() to keep track of the current slide */
 var currentImgIndex = 0;
 
