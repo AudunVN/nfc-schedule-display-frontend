@@ -193,3 +193,39 @@
 .event_cancelled {
 	text-decoration: line-through;
 }
+
+.slick-slide > * {
+	left: 0;
+	position: relative;
+}
+
+.schedule.portrait > .row > * {
+	width: 100% !important;
+	height: 50% !important;
+}
+
+.schedule.portrait > .row > *:nth-child(1) .panel {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.schedule.portrait > .row > *:nth-child(2) .panel {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.schedule.no-animation * {
+	transition: none !important;
+	animation: none !important;
+}
+
+.schedule.landscape > .row > * {
+	width: 50% !important;
+	height: 100% !important;
+}
+
+@media only screen and (max-width: 991px) {
+	.schedule > .row > * {
+		height: 50%;
+	}
+}

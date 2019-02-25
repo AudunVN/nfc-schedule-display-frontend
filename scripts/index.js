@@ -1,3 +1,24 @@
+/* get/set device id */
+var uid = new ShortUniqueId();
+
+var deviceId = "not-set";
+
+if (typeof(Storage) !== "undefined") {
+	if (localStorage.getItem("device_id")) {
+		deviceId = localStorage.getItem("device_id");
+	} else {
+		deviceId = "471-" + uid.randomUUID(6);
+		localStorage.setItem("device_id", deviceId);
+	}
+} else {
+	deviceId = "x-" + uid.randomUUID(6);
+}
+
+document.querySelector("#device-id").innerHTML = "<h3 class='text-center'>" + deviceId + "</h3>";
+
+setTimeout(function(){ document.querySelector("#device-id").className = "hide"; }, 10000);
+/* end get/set device id */
+
 /* static settings */
 var dateTimeInputFormat = "YYYY-MM-DD[T]HH:mm:ss[Z]";
 var timezone = "Europe/Stockholm";
@@ -27,9 +48,9 @@ var tweetReady = function(tweetstring) {
 };
 
 var configProfile = {
-	"profile": {"screenName": Settings.get().twitterUsername},
+	"profile": {"screenName": Settings.getForDevice(deviceId).twitterUsername},
 	"domId": 'announcements-container',
-	"maxTweets": 5,
+	"maxTweets": Settings.getForDevice(deviceId).maxTweets,
 	"enableLinks": true,
 	"customCallback": tweetReady,
 	"showUser": true,
@@ -58,6 +79,16 @@ function getDayTitle(time) {
 	return moment(time).tz(timezone).format("dddd [(]MMM Do[)]");
 }
 
+function isElementOverflowing(element) {
+    return (element.offsetWidth < element.scrollWidth);
+}
+
+function getOverflow(element) {
+	return (element.scrollWidth - element.offsetWidth);
+}
+
+
+
 /* used in updateSliders() to keep track of the current slide */
 var currentImgIndex = 0;
 
@@ -81,10 +112,10 @@ function updateClock() {
 }
 
 function updateSliders() {
-	var imgSrc = Settings.get().sliderImgs[currentImgIndex].url;
+	var imgSrc = Settings.getForDevice(deviceId).sliderImgs[currentImgIndex].url;
 	
 	currentImgIndex++;
-	if (currentImgIndex > Settings.get().sliderImgs.length - 1) {
+	if (currentImgIndex > Settings.getForDevice(deviceId).sliderImgs.length - 1) {
 		currentImgIndex = 0;
 	}
 
@@ -96,7 +127,7 @@ function updateSliders() {
 		$(".slide-img").toggleClass("next-img");
 	}
 
-	var messages = Settings.get().messages;
+	var messages = Settings.getForDevice(deviceId).messages;
 	if (JSON.stringify(previousMessages) != JSON.stringify(messages)) {
 		renderMessages(messages);
 		previousMessages = messages;
@@ -117,19 +148,46 @@ function renderMessages(messages) {
 		autoplay: false,
 		speed: 500,
 		arrows: false
-	  });
+	});
 
-	  console.log("Rendered messages");
+	$('#scroller').on('afterChange', function(event, slick){
+		$("#scroller .slick-slide > *").css({
+			left: 0,
+			transition: "left " + 0.0006*Settings.getForDevice(deviceId).sliderInterval + "s linear"
+		});
+		if (isElementOverflowing(document.querySelector("#scroller .slick-active > *"))) {
+			console.log("omg overflow");
+			setTimeout(function(){
+				$("#scroller .slick-active > *").css({left: -getOverflow(document.querySelector(".slick-active > *"))});
+			}, 0.0002*Settings.getForDevice(deviceId).sliderInterval);
+			
+		}
+	});
+	console.log("Rendered messages");
 }
 
 function loadSettings() {
-	var settings = Settings.get();
+	var settings = Settings.getForDevice(deviceId);
 	if (JSON.stringify(previousSettings) != JSON.stringify(settings)) {
 		if (settings.zoom) {
 			$(".schedule").css("zoom", settings.zoom);
 		}
-		if (Settings.get().debug && Settings.get().timeTravel) {
-			chronokinesis.travel(Settings.get().timeTravel);
+		if (settings.view && settings.view != "auto") {
+			if (settings.view == "portrait") {
+				$(".schedule").removeClass("landscape");
+				$(".schedule").addClass("portrait");
+			} else if (settings.view == "landscape") {
+				$(".schedule").removeClass("portrait");
+				$(".schedule").addClass("landscape");
+			}
+		}
+		if (settings.debug && settings.timeTravel) {
+			chronokinesis.travel(settings.timeTravel);
+		}
+		if (settings.noAnimations) {
+			$(".schedule").addClass("no-animation");
+		} else {
+			$(".schedule").removeClass("no-animation");
 		}
 		previousSettings = settings;
 		console.log("Loaded settings");
@@ -240,12 +298,12 @@ function runLoadSettings() {
 
 /* these are timed using a different method, as the intervals may change */
 function runSlider() {
-	setTimeout(runSlider, Settings.get().sliderInterval);
+	setTimeout(runSlider, Settings.getForDevice(deviceId).sliderInterval);
 	updateSliders();
 }
 
 function runTweets() {
-	setTimeout(runTweets, Settings.get().tweetRefreshInterval);
+	setTimeout(runTweets, Settings.getForDevice(deviceId).tweetRefreshInterval);
 	updateTweets();
 }
 

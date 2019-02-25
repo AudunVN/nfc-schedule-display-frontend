@@ -45,11 +45,23 @@ if (window.location.href.indexOf("test") == -1) {
     document.querySelector(".test-mode-warning").classList.remove("hidden");
 }
 
+var deviceSpecificSettings = [
+    {
+        deviceId: "uXhOvR",
+        zoom: 1.3,
+        view: "auto",
+        noAnimation: false
+    },
+];
+
 var defaultSettings = {
+    view: "auto",
+    noAnimations: false,
     reloadBy: 0, // reload by this time (if site available), datetime in ms
     eventsLifetime: 10 * 1000, // best-before time for schedule data, in ms
     settingsLifetime: 10 * 1000, // best-before time for schedule settings, in ms
     tweetRefreshInterval: 60 * 1000, // twitter fetch interval, in ms
+    maxTweets: 5,
     settingsURLs: [settingsUrl], // priority list of URLs to fetch settings from
     eventURLs: [baseApiUrl, "./data/events.json"], // priority list of URLs to fetch event data from
     eventApiKey: apiKey,
@@ -95,8 +107,10 @@ var defaultSettings = {
     ],
     messages: [
         "<h3>Welcome to <a href='https://twitter.com/intent/tweet?button_hashtag=NFC2019'>#NFC2019</a>!</h3>",
-        "<h3>Test</h3>",
-	]
+        "<h3>This message is way too long</h3>",
+        "<h3>Test</h3>"
+    ],
+    deviceSpecificSettings: deviceSpecificSettings
 };
 
 /* to aid with copy-pasting it over to settings.json */
@@ -192,5 +206,21 @@ var Settings = {
             this.updateSettings(0);
         }
         return this.settings;
+    },
+    getForDevice: function(deviceId) {
+        var settings = this.get();
+        if (typeof settings.deviceSpecificSettings !== 'undefined') {
+            var deviceSettings = settings.deviceSpecificSettings.filter(function(settings){ return settings.deviceId === deviceId });
+            if (typeof deviceSettings !== 'undefined') {
+                deviceSettings = deviceSettings[0];
+                for (var customSetting in deviceSettings) {
+                    if (settings.hasOwnProperty(customSetting)) {
+                        /* overwrite with custom property */
+                        settings[customSetting] = deviceSettings[customSetting];
+                    }
+                }
+            }
+        }
+        return settings;
     }
 };
