@@ -24,6 +24,8 @@
 }
 
 .schedule tr {
+	-webkit-transition: font-weight 0.5s ease, font-size 0.5s ease, background 0.5s ease;
+	-o-transition: font-weight 0.5s ease, font-size 0.5s ease, background 0.5s ease;
 	transition: font-weight 0.5s ease, font-size 0.5s ease, background 0.5s ease;
 	font-weight: normal;
 	font-size: 1em;
@@ -58,7 +60,8 @@
 .schedule {
 	background-image: url("https://www.nordicfuzzcon.org/Content/themes/2019/img/nfc-banner_md_blurred.jpg");
 	background-position: center center;
-	background-size: cover;
+	-webkit-background-size: cover;
+	        background-size: cover;
 	background-repeat: no-repeat;
 	padding-bottom: 6em;
 }
@@ -77,20 +80,23 @@
 	display: inline-block;
 	position: relative;
 	top: -0.11em;
-	border-radius: 0.1em;
+	-webkit-border-radius: 0.1em;
+	        border-radius: 0.1em;
 }
 
 #scroller .scroll-content {
 	height: 3em;
 	padding: 0.5em;
 	white-space: nowrap;
-	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	   text-overflow: ellipsis;
 }
 
 #scroller .scroll-content > * {
 	margin-top: 0;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
 }
 
 .row {
@@ -125,7 +131,8 @@
 
 .slider-container {
 	border: 1em solid white;
-	box-shadow: 0 0 2em 1em white;
+	-webkit-box-shadow: 0 0 2em 1em white;
+	        box-shadow: 0 0 2em 1em white;
 	background: white;
 	position: absolute;
 	top: 66%;
@@ -146,7 +153,8 @@
 }
 
 #image-display .slide-img {
-	background-size: contain;
+	-webkit-background-size: contain;
+	        background-size: contain;
 	background-position: center center;
 	background-repeat: no-repeat;
 	position: absolute;
@@ -154,6 +162,8 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
+	-webkit-transition: opacity 0.5s ease-in-out;
+	-o-transition: opacity 0.5s ease-in-out;
 	transition: opacity 0.5s ease-in-out;
 	opacity: 0;
 }
@@ -174,7 +184,8 @@
 
 .row > *:first-child > .panel {
 	background: white;
-	background-size: 100%;
+	-webkit-background-size: 100% 100%;
+	        background-size: 100%;
 	background-position: bottom center;
 	background-repeat: no-repeat
 }
@@ -187,7 +198,9 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	    -ms-transform: translate(-50%, -50%);
+	        transform: translate(-50%, -50%);
 }
 
 .event_cancelled {
@@ -205,18 +218,25 @@
 }
 
 .schedule.portrait > .row > *:nth-child(1) .panel {
-	border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;
+	-webkit-border-bottom-left-radius: 0;
+	        border-bottom-left-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	        border-bottom-right-radius: 0;
 }
 
 .schedule.portrait > .row > *:nth-child(2) .panel {
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
+	-webkit-border-top-left-radius: 0;
+	        border-top-left-radius: 0;
+	-webkit-border-top-right-radius: 0;
+	        border-top-right-radius: 0;
 }
 
 .schedule.no-animation * {
+	-webkit-transition: none !important;
+	-o-transition: none !important;
 	transition: none !important;
-	animation: none !important;
+	-webkit-animation: none !important;
+	        animation: none !important;
 }
 
 .schedule.landscape > .row > * {
