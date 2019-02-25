@@ -65,7 +65,7 @@ var defaultSettings = {
     settingsURLs: [settingsUrl], // priority list of URLs to fetch settings from
     eventURLs: [baseApiUrl, "./data/events.json"], // priority list of URLs to fetch event data from
     eventApiKey: apiKey,
-    zoom: 1.3, // default zoom level, useful for scaling to fit to lobby displays
+    zoom: 1, // default zoom level, useful for scaling to fit to lobby displays
     sliderInterval: 10 * 1000, // slide change interval, in ms
     sliderTransition: 0.5 * 1000, // slide transition length, in ms
     twitterUsername: "LiveFuzz",
