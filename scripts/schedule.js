@@ -109,8 +109,8 @@ var defaultSettings = {
     ],
     messages: [
         "<h3>Welcome to <a href='https://twitter.com/intent/tweet?button_hashtag=NFC2019'>#NFC2019</a>!</h3>",
-        "<h3>Schedule display is being tested</h3>",
-        "<h3>This is a very long test message to see if scrolling works</h3>",
+        "<h3>Schedule display is being tested.</h3>",
+        "<h3>This is a very long test message to see if scrolling works.</h3>",
     ],
     deviceSpecificSettings: deviceSpecificSettings
 };
