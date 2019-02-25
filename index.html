@@ -80,32 +80,30 @@
 			// Track basic JavaScript errors
 			window.addEventListener('error', function(e) {
 				console.log("oh no");
-				gtag('event', 'exception', {
-					'description': e.message + ' at ' + e.filename + ' : ' + e.lineno,
-					'fatal': false
+				gtag('event', 'issue', {
+					'label': e.message + ' at ' + e.filename + ' : ' + e.lineno
 				});
 			});
 
 			window.onerror = function(message, source, lineno, colno, error) {
 				console.log("oh no");
-				gtag('event', 'exception', {
-					'description': message + ' at ' + source + ' : ' + lineno + " -> " + colno,
-					'fatal': false
+				gtag('event', 'issue', {
+					'label': message + ' at ' + source + ' : ' + lineno + " -> " + colno
 				});
 			};
 
 			// Track AJAX errors (jQuery API)
 			$(document).ajaxError(function(e, request, settings) {
-				gtag('event', 'exception', {
-					'description': e.result + ' at ' + settings.url,
-					'fatal': false
+				gtag('event', 'issue', {
+					'label': e.result + ' at ' + settings.url
 				});
 			});
-			gtag('event', 'exception', {
-				'description': 'error_description',
-				'fatal': false   // set to true if the error is fatal
+			gtag('event', 'issue', {
+				'label': 'issue'
 			});
-			confole.god()
+		</script>
+		<script>
+		confole.log
 		</script>
 	</body>
 </html>
