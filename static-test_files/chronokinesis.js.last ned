@@ -1,0 +1,120 @@
+var chronokinesis = (function (exports) {
+  'use strict';
+
+  /**
+   * Inspired by Time keeper - EEasy testing of time-dependent code.
+   *
+   * Veselin Todorov <hi@vesln.com>
+   * MIT License.
+   */
+
+  var NativeDate = Date;
+  var freezedAt = null;
+  var traveledTo = null;
+  var started = null;
+
+  function FakeDate() {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    var length = args.length;
+    if (!length && freezedAt) return new NativeDate(freezedAt);
+    if (!length && traveledTo) return new NativeDate(time());
+    return instantiate(NativeDate, args);
+  }
+
+  FakeDate.UTC = NativeDate.UTC;
+  FakeDate.parse = NativeDate.parse;
+  FakeDate.prototype = NativeDate.prototype;
+
+  FakeDate.now = function () {
+    if (freezedAt) return freezedAt.getTime();
+    return time();
+  };
+
+  var chronokinesis = {
+    freeze: freeze,
+    defrost: defrost,
+    travel: travel,
+    reset: reset,
+    isKeepingTime: isKeepingTime
+  };
+
+  function freeze() {
+    useFakeDate();
+
+    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    freezedAt = instantiate(Date, args);
+    return freezedAt;
+  }
+
+  function defrost() {
+    freezedAt = null;
+  }
+
+  function travel() {
+    useFakeDate();
+
+    for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      args[_key3] = arguments[_key3];
+    }
+
+    var travelToDate = instantiate(Date, args);
+    traveledTo = travelToDate.getTime();
+    started = NativeDate.now();
+
+    if (freezedAt) {
+      freezedAt = travelToDate;
+    }
+
+    return travelToDate;
+  }
+
+  function reset() {
+    useNativeDate();
+    freezedAt = null;
+    started = null;
+    traveledTo = null;
+  }
+
+  function isKeepingTime() {
+    return Date === FakeDate;
+  }
+
+  function useFakeDate() {
+    Date = FakeDate; // eslint-disable-line no-global-assign
+  }
+
+  function useNativeDate() {
+    Date = NativeDate; // eslint-disable-line no-global-assign
+  }
+
+  function time() {
+    return traveledTo + (NativeDate.now() - started);
+  }
+
+  function instantiate(type, args) {
+    var ctorArgs = args.slice();
+    ctorArgs.unshift(null);
+    return new (Function.prototype.bind.apply(type, ctorArgs))();
+  }
+  var chronokinesis_1 = chronokinesis.freeze;
+  var chronokinesis_2 = chronokinesis.defrost;
+  var chronokinesis_3 = chronokinesis.travel;
+  var chronokinesis_4 = chronokinesis.reset;
+  var chronokinesis_5 = chronokinesis.isKeepingTime;
+
+  exports.default = chronokinesis;
+  exports.freeze = chronokinesis_1;
+  exports.defrost = chronokinesis_2;
+  exports.travel = chronokinesis_3;
+  exports.reset = chronokinesis_4;
+  exports.isKeepingTime = chronokinesis_5;
+
+  return exports;
+
+}({}));
