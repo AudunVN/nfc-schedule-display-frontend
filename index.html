@@ -80,27 +80,28 @@
 		<script>
 			// Track basic JavaScript errors
 			window.addEventListener('error', function(e) {
-				console.log("oh no");
-				gtag('event', 'issue', {
-					'label': e.message + ' at ' + e.filename + ' : ' + e.lineno
+				gtag('event', 'exception', {
+					'description': e.message + ' at ' + e.filename + ' : ' + e.lineno,
+					'fatal': true
 				});
 			});
 
 			window.onerror = function(message, source, lineno, colno, error) {
-				console.log("oh no");
-				gtag('event', 'issue', {
-					'label': message + ' at ' + source + ' : ' + lineno + " -> " + colno
+				gtag('event', 'exception', {
+					'description': message + ' at ' + source + ' : ' + lineno + " -> " + colno,
+					'fatal': true
 				});
 			};
 
 			// Track AJAX errors (jQuery API)
 			$(document).ajaxError(function(e, request, settings) {
-				gtag('event', 'issue', {
-					'label': e.result + ' at ' + settings.url
+				gtag('event', 'exception', {
+					'description': e.result + ' at ' + settings.url,
+					'fatal': true
 				});
 			});
-			gtag('event', 'issue', {
-				'label': 'issue'
+			gtag('event', 'exception', {
+				'description': 'issue'
 			});
 		</script>
 	</body>
