@@ -107,8 +107,7 @@ var defaultSettings = {
     ],
     messages: [
         "<h3>Welcome to <a href='https://twitter.com/intent/tweet?button_hashtag=NFC2019'>#NFC2019</a>!</h3>",
-        "<h3>This message is way too long</h3>",
-        "<h3>Test</h3>"
+        "<h3>This is a very long test message to see if scrolling works</h3>",
     ],
     deviceSpecificSettings: deviceSpecificSettings
 };
@@ -139,8 +138,9 @@ var Events = {
                     eventObj.events = data;
                     eventObj.lastUpdate = Date.now();
                 },
-                error: function() {
+                error: function(xhr, error) {
                     console.warn("Couldn't get events from " + settings.eventURLs[i]);
+                    console.log(xhr.status);
                     if (i+1 < settings.eventURLs.length) {
                         /* try again with next URL in list */
                         eventObj.getInProgress = false;
@@ -186,8 +186,9 @@ var Settings = {
                     setObj.settings = data;
                     setObj.lastUpdate = Date.now();
                 },
-                error: function() {
+                error: function(xhr, error) {
                     console.warn("Couldn't get settings from " + settings.settingsURLs[i]);
+                    console.log(error);
                     if (i+1 < settings.settingsURLs.length) {
                         /* try again with next URL in list */
                         setObj.getInProgress = false;
