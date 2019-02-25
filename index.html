@@ -94,9 +94,9 @@
 			};
 
 			// Track AJAX errors (jQuery API)
-			$(document).ajaxError(function(e, request, settings) {
+			$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
 				gtag('event', 'exception', {
-					'description': e.result + ' at ' + settings.url,
+					'description': thrownError + ' at ' + settings.url + ' - Response text: ' + jqxhr.responseText,
 					'fatal': true
 				});
 			});
