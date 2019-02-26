@@ -26,7 +26,7 @@
 		gtag('config', 'UA-128189478-2');
 		</script>
 
-		<script src="scripts/jquery.min.js"></script>
+		<script src="scripts/jquery-1.12.4.min.js"></script>
 
 		<script>
 			// Track basic JavaScript errors
@@ -43,6 +43,26 @@
 					'fatal': true
 				});
 			};
+
+			try {
+				if (window.htmlLoader) {
+					window.htmlLoader.addEventListener("uncaughtScriptException", function(event) {
+						var message = "exceptionValue:" + event.exceptionValue + "\n"; 
+						for (var i = 0; i < event.stackTrace.length; i++){ 
+							message += "sourceURL:" + event.stackTrace[i].sourceURL +"\n"; 
+							message += "line:" + event.stackTrace[i].line +"\n"; 
+							message += "function:" + event.stackTrace[i].functionName + "\n"; 
+						} 
+						gtag('event', 'exception', {
+							'description': message,
+							'fatal': true
+						});
+					}); 
+				}
+			}
+			catch(err) {
+
+			}
 
 			// Track AJAX errors (jQuery API)
 			$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
