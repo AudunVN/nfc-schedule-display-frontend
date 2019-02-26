@@ -104,28 +104,17 @@ var previousSettings = {};
 /* used in loadSettings() to see whether we should reload */
 var lastPageLoad = Date.now();
 
-var clockCheckDone = false;
-
 /* end helper functions and objects */
 
 function updateClock() {
-	if ($("#clock").hasOwnProperty('fitText')) {
+	/*if ($("#clock").hasOwnProperty('fitText')) {
 		$('#clock').fitText(1.3);
-	}
+	}*/
 	
 	$('#clock').html(moment().format('MMMM Do HH:mm:ss'));
-	if (!clockCheckDone) {
-		gtag('event', 'exception', {
-			'description': 'Updating clock'
-		});
-		clockCheckDone = true;
-	}
 }
 
 function updateSliders() {
-	gtag('event', 'exception', {
-		'description': 'Updating sliders'
-	});
 	var imgSrc = Settings.getForDevice(deviceId).sliderImgs[currentImgIndex].url;
 	
 	currentImgIndex++;
@@ -148,15 +137,9 @@ function updateSliders() {
 	} else {
 		$('#scroller').slick('next');
 	}
-	gtag('event', 'exception', {
-		'description': 'Updated sliders'
-	});
 }
 
 function renderMessages(messages) {
-	gtag('event', 'exception', {
-		'description': 'Rendering messages'
-	});
 	$("#scroller.slick-initialized").slick("unslick");
 	$("#scroller").html("");
 	for (i = 0; i < messages.length; i++) {
@@ -182,9 +165,6 @@ function renderMessages(messages) {
 			}, 0.0002*Settings.getForDevice(deviceId).sliderInterval);
 			
 		}
-	});
-	gtag('event', 'exception', {
-		'description': 'Rendered messages'
 	});
 	console.log("Rendered messages");
 }
@@ -248,14 +228,7 @@ function setEventStates() {
 function updateSchedule() {
 	var events = Events.get();
 
-	gtag('event', 'exception', {
-		'description': 'Loaded events'
-	});
-
 	if (JSON.stringify(events) != JSON.stringify(previousEvents)) {
-		gtag('event', 'exception', {
-			'description': 'Got new events, rendering'
-		});
 		console.log("Rendering latest events");
 		previousEvents = events;
 
@@ -298,10 +271,6 @@ function updateSchedule() {
 			$(".schedule .table tbody").append(eventRow);
 		}
 
-		gtag('event', 'exception', {
-			'description': 'Finished rendering events'
-		});
-
 		setEventStates();
 		$(".schedule .table tbody").show();
 	}
@@ -312,9 +281,6 @@ function updateSchedule() {
 function updateTweets() {	
 	twitterFetcher.fetch(configProfile);
 	console.log("Updated tweets");
-	gtag('event', 'exception', {
-		'description': 'Rendered tweets'
-	});
 }
 
 /* timers */
