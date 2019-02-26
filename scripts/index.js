@@ -104,6 +104,8 @@ var previousSettings = {};
 /* used in loadSettings() to see whether we should reload */
 var lastPageLoad = Date.now();
 
+var clockCheckDone = false;
+
 /* end helper functions and objects */
 
 function updateClock() {
@@ -112,9 +114,12 @@ function updateClock() {
 	}
 	
 	$('#clock').html(moment().format('MMMM Do HH:mm:ss'));
-	gtag('event', 'exception', {
-		'description': 'Updating clock'
-	});
+	if (!clockCheckDone) {
+		gtag('event', 'exception', {
+			'description': 'Updating clock'
+		});
+		clockCheckDone = true;
+	}
 }
 
 function updateSliders() {
