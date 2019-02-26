@@ -57,7 +57,7 @@ var deviceSpecificSettings = [
 ];
 
 var defaultSettings = {
-    view: "auto",
+    view: "landscape",
     noAnimations: false,
     reloadBy: Date.now()+300*1000, // reload by this time (if site available), datetime in ms
     eventsLifetime: 10 * 1000, // best-before time for schedule data, in ms
