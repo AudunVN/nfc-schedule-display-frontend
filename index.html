@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" >
 	<head>
+		<script>
+			setTimeout(function(){ location.reload(true) }, 10000);
+		</script>
 		<meta charset="UTF-8">
 		<title>NordicFuzzCon Live Schedule</title>
 		<link rel="shortcut icon" href="favicon.ico">
@@ -10,6 +13,7 @@
 		<link rel='stylesheet' href='styles/slick-theme.min.css'>
 		<link rel="stylesheet" href="styles/nfc_bootstrap.min.css">
 		<link rel="stylesheet" href="styles/style.css">
+		<script>!function(){"use strict";var bind=function(a,b){var c=Array.prototype.slice.call(arguments,2);return function(){var d=c.concat(Array.prototype.slice.call(arguments,0));a.apply(b,d)}};window.console||(window.console={});var console=window.console;if(!console.log)if(window.log4javascript){var log=log4javascript.getDefaultLogger();console.log=bind(log.info,log),console.debug=bind(log.debug,log),console.info=bind(log.info,log),console.warn=bind(log.warn,log),console.error=bind(log.error,log)}else console.log=function(){};if(console.debug||(console.debug=console.log),console.info||(console.info=console.log),console.warn||(console.warn=console.log),console.error||(console.error=console.log),null!=window.__consoleShimTest__||eval("/*@cc_on @_jscript_version <= 9@*/")){var wrap=function(a){var b,c,d,e;if(a=Array.prototype.slice.call(arguments,0),e=a.shift(),c=a.length,c>1&&window.__consoleShimTest__!==!1)for("string"!=typeof a[0]&&(a.unshift("%o"),c+=1),d=a[0].match(/%[a-z]/g),b=d?d.length+1:1;c>b;b+=1)a[0]+=" %o";Function.apply.call(e,console,a)};console.log=bind(wrap,window,console.log),console.debug=bind(wrap,window,console.debug),console.info=bind(wrap,window,console.info),console.warn=bind(wrap,window,console.warn),console.error=bind(wrap,window,console.error)}if(console.assert||(console.assert=function(){var a=Array.prototype.slice.call(arguments,0),b=a.shift();b||(a[0]="Assertion failed: "+a[0],console.error.apply(console,a))}),console.dir||(console.dir=console.log),console.dirxml||(console.dirxml=console.log),console.exception||(console.exception=console.error),!console.time||!console.timeEnd){var timers={};console.time=function(a){timers[a]=(new Date).getTime()},console.timeEnd=function(a){var b=timers[a];b&&(console.log(a+": "+((new Date).getTime()-b)+"ms"),delete timers[a])}}console.table||(console.table=function(a,b){var c,d,e,f,g,h;if(a&&a instanceof Array&&a.length){if(!(b&&b instanceof Array)){b=[];for(h in a[0])a[0].hasOwnProperty(h)&&b.push(h)}for(c=0,d=a.length;d>c;c+=1){for(e=[],f=0,g=b.length;g>f;f+=1)e.push(a[c][b[f]]);Function.apply.call(console.log,console,e)}}}),console.clear||(console.clear=function(){}),console.trace||(console.trace=function(){}),console.group||(console.group=function(){}),console.groupCollapsed||(console.groupCollapsed=function(){}),console.groupEnd||(console.groupEnd=function(){}),console.timeStamp||(console.timeStamp=function(){}),console.profile||(console.profile=function(){}),console.profileEnd||(console.profileEnd=function(){}),console.count||(console.count=function(){})}();</script>
 		<style>
 			html, body {
 				background-color: #2c446a;
@@ -27,55 +31,6 @@
 		</script>
 
 		<script src="scripts/jquery-1.12.4.min.js"></script>
-
-		<script>
-			// Track basic JavaScript errors
-			window.addEventListener('error', function(e) {
-				gtag('event', 'exception', {
-					'description': e.message + ' at ' + e.filename + ' : ' + e.lineno,
-					'fatal': true
-				});
-			});
-
-			window.onerror = function(message, source, lineno, colno, error) {
-				gtag('event', 'exception', {
-					'description': message + ' at ' + source + ' : ' + lineno + " -> " + colno,
-					'fatal': true
-				});
-			};
-
-			try {
-				if (window.htmlLoader) {
-					window.htmlLoader.addEventListener("uncaughtScriptException", function(event) {
-						var message = "exceptionValue:" + event.exceptionValue + "\n"; 
-						for (var i = 0; i < event.stackTrace.length; i++){ 
-							message += "sourceURL:" + event.stackTrace[i].sourceURL +"\n"; 
-							message += "line:" + event.stackTrace[i].line +"\n"; 
-							message += "function:" + event.stackTrace[i].functionName + "\n"; 
-						} 
-						gtag('event', 'exception', {
-							'description': message,
-							'fatal': true
-						});
-					}); 
-				}
-			}
-			catch(err) {
-
-			}
-
-			// Track AJAX errors (jQuery API)
-			$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
-				gtag('event', 'exception', {
-					'description': thrownError + ' at ' + settings.url + ' - Response text: ' + jqxhr.responseText,
-					'fatal': true
-				});
-			});
-
-			gtag('event', 'exception', {
-				'description': 'test issue'
-			});
-		</script>
 	</head>
 
 	<body>
@@ -84,9 +39,11 @@
 				<div class="col-md-6">
 					<div id="info-panel" class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">Announcements</h3>
+							<h3 class="panel-title">Log</h3>
 						</div>
 						<div class="panel-content-wrapper">
+							<div id="error-1"></div>
+							<div id="error-2"></div>
 							<div class="panel-body" id="announcements-container"><img class="loader" src="img/blushy-thing-loader.gif"></div>
 							<div class="slider-container">
 								<div id="image-display">
@@ -114,17 +71,89 @@
 					</div>
 				</div>
 			</div>
-			<div id="scroller" class="panel text-center"></div>
+			<div id="scroller" class="panel text-center"><h4>Test mode</h4></div>
 		</div>
 		<!-- Latest compiled and minified JavaScript -->
+		<script>
+		    var baseLogFunction = console.log;
+			console.log = function(){
+				baseLogFunction.apply(console, arguments);
+
+				var args = Array.prototype.slice.call(arguments);
+				for(var i=0;i<args.length;i++){
+					var node = createLogNode(args[i]);
+					document.querySelector("#error-1").appendChild(node);
+				}
+
+			}
+
+			function createLogNode(message){
+				var node = document.createElement("div");
+				var textNode = document.createTextNode(message);
+				node.appendChild(textNode);
+				return node;
+			}
+
+			window.onerror = function(message, url, linenumber) {
+				console.log("JavaScript error: " + message + " on line " +
+					linenumber + " for " + url);
+			}
+			// Track basic JavaScript errors
+			window.addEventListener('error', function(e) {
+				$("#error-1").html(message + ' at ' + source + ' : ' + lineno + " -> " + colno);
+				gtag('event', 'exception', {
+					'description': e.message + ' at ' + e.filename + ' : ' + e.lineno,
+					'fatal': true
+				});
+			});
+
+			window.onerror = function(message, source, lineno, colno, error) {
+				$("#error-2").html(message + ' at ' + source + ' : ' + lineno + " -> " + colno);
+				gtag('event', 'exception', {
+					'description': message + ' at ' + source + ' : ' + lineno + " -> " + colno,
+					'fatal': true
+				});
+			};
+
+			try {
+				window.htmlLoader.addEventListener("uncaughtScriptException", function(event) {
+					var message = "exceptionValue:" + event.exceptionValue + "\n"; 
+					for (var i = 0; i < event.stackTrace.length; i++){ 
+						message += "sourceURL:" + event.stackTrace[i].sourceURL +"\n"; 
+						message += "line:" + event.stackTrace[i].line +"\n"; 
+						message += "function:" + event.stackTrace[i].functionName + "\n"; 
+					} 
+					$("#error-2").html(message);
+					gtag('event', 'exception', {
+						'description': message,
+						'fatal': true
+					});
+				}); 
+			}
+			catch(err) {
+
+			}
+
+			// Track AJAX errors (jQuery API)
+			$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+				gtag('event', 'exception', {
+					'description': thrownError + ' at ' + settings.url + ' - Response text: ' + jqxhr.responseText,
+					'fatal': true
+				});
+			});
+
+			gtag('event', 'exception', {
+				'description': 'test issue'
+			});
+		</script>
 		<script src="scripts/bootstrap.min.js"></script>
-		<script src="scripts/external_scripts.js"></script>
+		<script src="scripts/external_scripts.js?test"></script>
 		<script src="scripts/moment.min.js"></script>
 		<script src="scripts/moment-timezone-with-data.min.js"></script>
 		<script src="scripts/jquery.fittext.min.js"></script>
 		<script src='scripts/slick.min.js'></script>
 		<script src="scripts/chronokinesis.js"></script>
 		<script src="scripts/schedule.js"></script>
-		<script src="scripts/index.js"></script>
+		<script src="scripts/index.js?test"></script>
 	</body>
 </html>

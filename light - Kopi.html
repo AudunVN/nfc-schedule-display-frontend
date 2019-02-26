@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta charset="UTF-8">
 		<title>NordicFuzzCon Live Schedule</title>
+        <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default%2Cdocument.querySelector%2CEvent%2CJSON%2CURL%2CWindow%2Cconsole%2Cconsole.error%2Cconsole.log%2Cconsole.info%2Cconsole.warn%2Cdocument%2C%7Ehtml5-elements%2C%7Eviewport%2Cfetch%2CDate.prototype.toISOString%2CDate.now%2CArray.prototype.find%2CArray.prototype.filter%2CArray.prototype.forEach%2CArray.prototype.includes%2CArray.prototype.indexOf%2CArray.prototype.map"></script>
 		<link rel="shortcut icon" href="favicon.ico">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -152,106 +153,7 @@
         <script src="scripts/external_scripts.js?test"></script>
 		<script src="scripts/moment.min.js"></script>
 		<script src="scripts/moment-timezone-with-data.min.js"></script>
-		<script>
-        var dateTimeInputFormat = "YYYY-MM-DD[T]HH:mm:ss[Z]";
-        var timezone = "Europe/Stockholm";
-        $.ajaxSetup({ cache: false });
-
-        function renderTagsToClassList(tagArray) {
-            if (tagArray) {
-                var tagsString = "";
-                for (var i = 0; i < tagArray.length; i++) {
-                    tagsString += "event_" + tagArray[i] + " ";
-                }
-                return tagsString;
-            }
-            return "";
-        }
-
-        function getDayTitle(time) {
-            return moment(time).tz(timezone).format("dddd [(]MMM Do[)]");
-        }
-        
-        function setEventStates() {
-            $(".schedule .table tbody tr").each(function(index, object) {
-                if (parseInt($(this).data("end")) < Date.now()) {
-                    if ($(this).is(":visible")) {
-                        $(this).fadeOut(500);
-                    } else {
-                        $(this).hide();
-                    }
-                } else if (parseInt($(this).data("start")) < Date.now()) {
-                    $(this).addClass("success");
-                }
-            });
-        }
-
-        function updateSchedule() {
-            $.ajax({
-                url: "data/events.json",
-                type: 'GET',
-                dataType: 'json',
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader('X-API-KEY', "f18f8411-42ba-4587-aed0-90d55bcb3b49");
-                },
-                success: function(data) {
-                    var events = data;
-
-                    $(".schedule .table tbody").hide();
-                    $(".schedule .table tbody").html("");
-                    $(".loader").hide();
-
-                    for (var i = 0; i < events.length; i++) {
-                        var event = events[i];
-
-                        var startTime = moment(event.startTime).tz(timezone).second(0).valueOf();
-                        var endTime =  moment(event.endTime).tz(timezone).second(0).valueOf();
-                        var eventRow = $("" + 
-                        "<tr class='" + renderTagsToClassList(event.eventTags)  + "' data-start='" + startTime + "' data-end='" +endTime + "'><td>" +
-                            event.title +
-                        "</td><td>" +
-                            event.location +
-                        "</td><td>" +
-                            moment(event.startTime).tz(timezone).format("HH:mm") +
-                        "</td><td>" +
-                            moment(event.endTime).tz(timezone).format("HH:mm") + 
-                        "</td></tr>");
-
-                        if (moment(event.endTime).tz(timezone).valueOf() - Date.now() < 0) {
-                            eventRow.hide();
-                        } else if (getDayTitle(previousEvent.startTime) != getDayTitle(event.startTime)) {
-                            /* new day! add a title */
-                            var dayRow = $("" + 
-                            "<tr data-end='" + moment(event.startTime).hour(0).minute(0).second(0) + "' class='warning text-center'><td colspan=4>" +
-                                getDayTitle(event.startTime) +
-                            "</td></tr>");
-                            $(".schedule .table tbody").append(dayRow);
-                        }
-
-                        if (event.title.toLowerCase().indexOf("cancelled") != -1) {
-                            eventRow.addClass("event_cancelled");
-                        }
-
-                        previousEvent = event;
-                        $(".schedule .table tbody").append(eventRow);
-                    }
-
-                    gtag('event', 'exception', {
-                        'description': 'Finished rendering events'
-                    });
-
-                    setEventStates();
-                    $(".schedule .table tbody").show();
-
-                    setEventStates();
-                },
-                error: function(xhr, status, error) {
-                    $(".schedule .table tbody").html("<h2 class='text-center'>Could not load events: " + xhr.status + ': ' + xhr.statusText + "</h2>");
-                }
-            });
-        }
-
-        updateSchedule();
-        </script>
+		<script src="scripts/schedule.js?test"></script>
+		<script src="scripts/index.js?test"></script>
 	</body>
 </html>

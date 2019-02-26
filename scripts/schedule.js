@@ -116,7 +116,8 @@ var defaultSettings = {
 };
 
 /* to aid with copy-pasting it over to settings.json */
-console.log(JSON.stringify(defaultSettings));
+/*console.log(JSON.stringify(defaultSettings));*/
+console.log("Test");
 
 var Events = {
     events: defaultEvents,
