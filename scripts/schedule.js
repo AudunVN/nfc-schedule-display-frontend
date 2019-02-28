@@ -75,42 +75,18 @@ var defaultSettings = {
     timeTravel: 0, //new Date(2019,1,27,16,29,45), // datetime or moment, useful for light time travel if you want to test the schedule
     sliderImgs: [
 		{
-			url: "img/slider/DSC02965-PANO-3-2.jpg",
-			caption: ""
-		},
-		{
-			url: "img/slider/DSC02965-PANO-2-1.jpg",
-			caption: ""
-		},
-		{
-			url: "img/slider/DSC02965-PANO-3-1.jpg",
-			caption: ""
-		},
-		{
-			url: "img/slider/DSC02965-PANO-4-1.jpg",
-			caption: ""
-        },
-		{
 			url: "img/slider/tumblr_pj2sw5tDL71t1ig6no1_640.gif",
 			caption: ""
 		},
 		{
 			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/placeholder_1.jpg",
 			caption: ""
-		},
-		{
-			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/background/nfc-banner_md.jpg",
-			caption: ""
-		},
-		{
-			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/background/Background_cmp_2000px.jpg",
-			caption: ""
 		}
     ],
     messages: [
         "<h3>Welcome to <a href='https://twitter.com/intent/tweet?button_hashtag=NFC2019'>#NFC2019</a>!</h3>",
-        "<h3>Schedule display is being tested.</h3>",
-        "<h3>This is a very long test message to see if scrolling works.</h3>",
+        "<h3>For detailed schedule information, see <a href='https://nordicfuzzcon.org/Program/Schedule'>nordicfuzzcon.org/Program/Schedule</a>.</h3>",
+        "<h3>Get the latest NFC news: <a href='http://social.nordicfuzzcon.org'>social.nordicfuzzcon.org</a>!</h3>",
     ],
     deviceSpecificSettings: deviceSpecificSettings
 };

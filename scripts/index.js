@@ -59,7 +59,7 @@ var configProfile = {
 	"showTime": true,
 	"showImages": true,
 	"dateFunction": function(date){
-		return moment.duration(date.getTime() - Date.now(), "milliseconds").humanize(true);
+		return moment.duration(date.getTime() - Date.now() + 3600000, "milliseconds").humanize(true);
 	},
 	"lang": 'en'
 };
@@ -107,9 +107,12 @@ var lastPageLoad = Date.now();
 /* end helper functions and objects */
 
 function updateClock() {
-	/*if ($("#clock").hasOwnProperty('fitText')) {
+	try {
 		$('#clock').fitText(1.3);
-	}*/
+	}
+	catch(err) {
+		console.log(err);
+	}
 	
 	$('#clock').html(moment().format('MMMM Do HH:mm:ss'));
 }
