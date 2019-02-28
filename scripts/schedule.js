@@ -81,7 +81,19 @@ var defaultSettings = {
 		{
 			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/placeholder_1.jpg",
 			caption: ""
-		}
+        },
+        {
+            url: "https://www.nordicfuzzcon.org/Content/2019/nl/1479062561.oakspirit_perf.jpg",
+            caption: ""
+        },
+        {
+            url: "http://games.nordicfuzzcon.org/schedule/mfpp_by_kokorokeke-dc2fv4b.gif",
+            caption: ""
+        },
+        {
+            url: "https://www.nordicfuzzcon.org/Content/2019/nl/1493214221.oakspirit_ekorn.jpg",
+            caption: ""
+        }
     ],
     messages: [
         "<h3>Welcome to <a href='https://twitter.com/intent/tweet?button_hashtag=NFC2019'>#NFC2019</a>!</h3>",
