@@ -75,28 +75,16 @@ var defaultSettings = {
     timeTravel: 0, //new Date(2019,1,27,16,29,45), // datetime or moment, useful for light time travel if you want to test the schedule
     sliderImgs: [
 		{
-			url: "img/slider/tumblr_pj2sw5tDL71t1ig6no1_640.gif",
+			url: "https://www.nordicfuzzcon.org/Content/2020/IMG_2246_lq_169_fp.jpg",
 			caption: ""
 		},
 		{
-			url: "https://www.nordicfuzzcon.org/Content/themes/2019/img/placeholder_1.jpg",
+			url: "https://www.nordicfuzzcon.org/Content/themes/2020/images/bg_main_cmp_2000px_progressive.jpg",
 			caption: ""
-        },
-        {
-            url: "https://www.nordicfuzzcon.org/Content/2019/nl/1479062561.oakspirit_perf.jpg",
-            caption: ""
-        },
-        {
-            url: "http://games.nordicfuzzcon.org/schedule/mfpp_by_kokorokeke-dc2fv4b.gif",
-            caption: ""
-        },
-        {
-            url: "https://www.nordicfuzzcon.org/Content/2019/nl/1493214221.oakspirit_ekorn.jpg",
-            caption: ""
         }
     ],
     messages: [
-        "<h3>Welcome to <a href='https://twitter.com/intent/tweet?button_hashtag=NFC2019'>#NFC2019</a>!</h3>",
+        "<h3>Welcome to <a href='https://twitter.com/intent/tweet?button_hashtag=NFC2020'>#NFC2020</a>!</h3>",
         "<h3>For detailed schedule information, see <a href='https://nordicfuzzcon.org/Program/Schedule'>nordicfuzzcon.org/Program/Schedule</a>.</h3>",
         "<h3>Get the latest NFC news: <a href='http://social.nordicfuzzcon.org'>social.nordicfuzzcon.org</a>!</h3>",
     ],
