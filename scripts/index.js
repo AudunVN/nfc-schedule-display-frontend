@@ -245,6 +245,12 @@ function updateSchedule() {
 
 			var startTime = moment(event.startTime).tz(timezone).second(0).valueOf();
 			var endTime =  moment(event.endTime).tz(timezone).second(0).valueOf();
+
+			if (endTime - startTime > 24*3600*1000) {
+				console.log("Skipped event longer than 24 hours: " + event.title);
+				continue;
+			}
+
 			var eventRow = $("" + 
 			"<tr class='" + renderTagsToClassList(event.eventTags)  + "' data-start='" + startTime + "' data-end='" +endTime + "'><td>" +
 				event.title +
