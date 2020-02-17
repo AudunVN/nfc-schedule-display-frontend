@@ -16,6 +16,7 @@ catch(err) {
 }
 
 document.querySelector("#device-id").innerHTML = "<h3 class='text-center'>" + deviceId + "</h3>";
+document.querySelector("#header-device-id").innerHTML = deviceId;
 
 setTimeout(function(){ document.querySelector("#device-id").style.display = "none"; }, 10000);
 /* end get/set device id */

@@ -57,6 +57,17 @@
 	border-bottom: 1px solid #CBCBCB;
 }
 
+.loader {
+	display: inline-block;
+    width: 10em;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.loader > * {
+	max-width: 100%;
+}
+
 .schedule {
 	background-image: url("../img/bg-test-v2.jpg");
 	background-position: center center;
