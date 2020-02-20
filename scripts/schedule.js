@@ -81,6 +81,26 @@ var defaultSettings = {
 		{
 			url: "https://www.nordicfuzzcon.org/Content/themes/2020/images/bg_main_cmp_2000px_progressive.jpg",
 			caption: ""
+        },
+		{
+			url: "https://www.nordicfuzzcon.org/Content/2020/Displays/nfc_tempsite_2020_layers.png",
+			caption: ""
+        },
+		{
+			url: "https://www.nordicfuzzcon.org/Content/2020/Displays/Mausie and Iris1_Doodle_Derg.png",
+			caption: ""
+        },
+		{
+			url: "https://www.nordicfuzzcon.org/Content/2020/Displays/A2_Poster_Cab - Lou2.jpg",
+			caption: ""
+        },
+		{
+			url: "https://www.nordicfuzzcon.org/Content/2020/Displays/Red - mausieirismic.png",
+			caption: ""
+        },
+		{
+			url: "https://www.nordicfuzzcon.org/Content/2020/Displays/Robin - nfc.png",
+			caption: ""
         }
     ],
     messages: [
